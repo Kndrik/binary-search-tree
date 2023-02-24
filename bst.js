@@ -106,6 +106,28 @@ class Tree {
 
         return array;
     }
+
+    preorder(func, node = this.root) {
+        let array = [];
+        if (func === undefined)
+            func = (_node) => { array.push(_node.data) };
+
+        func(node);
+        if (node.left !== null) this.preorder(func, node.left);
+        if (node.right !== null) this.preorder(func, node.right);
+        return array;
+    }
+
+    postorder(func, node = this.root) {
+        let array = [];
+        if (func === undefined)
+            func = (_node) => { array.push(_node.data) };
+
+        if (node.left !== null) this.postorder(func, node.left);
+        if (node.right !== null) this.postorder(func, node.right);
+        func(node);
+        return array;
+    }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -113,4 +135,4 @@ prettyPrint(myTree.root);
 console.log(' ');
 console.log(' ');
 console.log(' ');
-myTree.inorder(node => console.log(node.data));
+myTree.postorder(node => console.log(node.data));
