@@ -80,19 +80,30 @@ class Tree {
 
     queue = new Array();
 
-    levelOrder(_func) {
+    levelOrder(func) {
         let array = [];
-        if (_func === undefined) {
-            _func = (node) => { array.push(node.data) };
-        }
+        if (func === undefined)
+            func = (node) => { array.push(node.data) };
 
         this.queue.push(this.root);
         while(this.queue.length !== 0) {
             const node = this.queue.shift();
-            _func(node);
+            func(node);
             if (node.left !== null) this.queue.push(node.left);
             if (node.right !== null) this.queue.push(node.right);
         }
+        return array;
+    }
+
+    inorder(func, node = this.root) {
+        let array = [];
+        if (func === undefined)
+            func = (_node) => { array.push(_node.data) };
+
+        if (node.left !== null) this.inorder(func, node.left);
+        func(node);
+        if (node.right !== null) this.inorder(func, node.right);
+
         return array;
     }
 }
@@ -102,4 +113,4 @@ prettyPrint(myTree.root);
 console.log(' ');
 console.log(' ');
 console.log(' ');
-myTree.levelOrder(node => console.log(node.data));
+myTree.inorder(node => console.log(node.data));
