@@ -142,6 +142,19 @@ class Tree {
         }
         return node.getHeight();
     }
+
+    depth(data) {
+        let steps = 0;
+        if (data.data !== undefined) data = data.data;
+        let node = this.root;
+        while(node !== null) {
+            if (data === node.data) return steps;
+            else if (data > node.data) node = node.right;
+            else node = node.left;
+            steps++;
+        }
+        return 'Node not found';
+    }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -149,4 +162,4 @@ prettyPrint(myTree.root);
 console.log(' ');
 console.log(' ');
 console.log(' ');
-console.log(myTree.height(4));
+console.log(myTree.depth(8));
