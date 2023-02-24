@@ -33,3 +33,13 @@ export const prettyPrint = (node, prefix = '', isLeft = true) => {
       prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
     }
 }
+
+export const removeDuplicates = (array) => {
+    let parsedArray = [];
+    array.forEach(element => {
+        if (!parsedArray.includes(element)) {
+            parsedArray.push(element);
+        }
+    });
+    return parsedArray;
+}

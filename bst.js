@@ -1,4 +1,4 @@
-import { mergeSort, lowestData, prettyPrint } from "./utilities.js";
+import { mergeSort, lowestData, prettyPrint, removeDuplicates } from "./utilities.js";
 import { Node } from "./node.js";
 
 class Tree {
@@ -7,12 +7,7 @@ class Tree {
     }
 
     buildTree(array) {
-        let parsedArray = [];
-        array.forEach(element => {
-            if (!parsedArray.includes(element)) {
-                parsedArray.push(element);
-            }
-        });
+        let parsedArray = removeDuplicates(array);
         parsedArray = mergeSort(parsedArray);
         return this.#buildTreeRec(parsedArray, 0, parsedArray.length-1);
     }
@@ -128,6 +123,25 @@ class Tree {
         func(node);
         return array;
     }
+
+    getNode(data) {
+        let node = this.root;
+        while (node !== null) {
+            if (node.data === data) return node;
+            else if (data > node.data) node = node.right;
+            else node = node.left;
+        }
+        return node;
+    }
+
+    height(data) {
+        const node = this.getNode(data);
+        if (node === null) {
+            console.log('Node not found');
+            return;
+        }
+        return node.getHeight();
+    }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -135,4 +149,4 @@ prettyPrint(myTree.root);
 console.log(' ');
 console.log(' ');
 console.log(' ');
-myTree.postorder(node => console.log(node.data));
+console.log(myTree.height(4));
