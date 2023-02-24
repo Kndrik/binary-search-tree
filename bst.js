@@ -134,13 +134,17 @@ class Tree {
         return node;
     }
 
-    height(data) {
-        const node = this.getNode(data);
-        if (node === null) {
-            console.log('Node not found');
-            return;
+    height(node) {
+        if (node == null) {
+            return -1;
         }
-        return node.getHeight();
+
+        let rightHeight = this.height(node.right);
+        let leftHeight = this.height(node.left);
+
+        let maxHeight = Math.max(rightHeight, leftHeight) + 1;
+
+        return maxHeight;
     }
 
     depth(data) {
@@ -155,6 +159,10 @@ class Tree {
         }
         return 'Node not found';
     }
+
+    isBalanced() {
+        return (Math.abs(this.height(this.root.left) - this.height(this.root.right))) < 2;
+    }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -162,4 +170,10 @@ prettyPrint(myTree.root);
 console.log(' ');
 console.log(' ');
 console.log(' ');
-console.log(myTree.depth(8));
+console.log(myTree.height(myTree.root.right));
+myTree.insert(300);
+myTree.insert(301);
+myTree.insert(302);
+myTree.insert(303);
+prettyPrint(myTree.root);
+console.log(myTree.isBalanced());
