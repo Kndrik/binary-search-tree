@@ -163,17 +163,23 @@ class Tree {
     isBalanced() {
         return (Math.abs(this.height(this.root.left) - this.height(this.root.right))) < 2;
     }
+
+    rebalance() {
+        const treeArray = this.levelOrder();
+        this.root = this.buildTree(treeArray);
+    }
 }
 
 const myTree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-prettyPrint(myTree.root);
 console.log(' ');
 console.log(' ');
 console.log(' ');
-console.log(myTree.height(myTree.root.right));
 myTree.insert(300);
 myTree.insert(301);
 myTree.insert(302);
-myTree.insert(303);
+myTree.insert(320);
+prettyPrint(myTree.root);
+console.log(myTree.isBalanced());
+myTree.rebalance();
 prettyPrint(myTree.root);
 console.log(myTree.isBalanced());
