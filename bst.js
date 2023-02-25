@@ -183,3 +183,7 @@ console.log(myTree.isBalanced());
 myTree.rebalance();
 prettyPrint(myTree.root);
 console.log(myTree.isBalanced());
+console.log(myTree.levelOrder());
+console.log(myTree.preorder());
+console.log(myTree.inorder());
+console.log(myTree.postorder());
